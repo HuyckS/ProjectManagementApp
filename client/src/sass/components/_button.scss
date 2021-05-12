@@ -1,0 +1,15 @@
+.btn {
+  /* psuedoclass of the class is link, visited */
+  color: $color-orange;
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    /* padding top and bottom 15 and left and right 40 */
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    /* can list out all properties that can be animated and seconds it will take */
+    font-size: 1.6rem;
+  }
+}

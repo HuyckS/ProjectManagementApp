@@ -1,0 +1,38 @@
+.activeNavBox {
+  display: inline-block;
+  color: $color-dark-blue;
+  font-weight: bold;
+  padding: 5px 15px 0px 15px;
+  border-left: black;
+  border-right: black;
+}
+
+.navBox {
+  display: inline-block;
+  height: 25px;
+  color: black;
+  font-weight: bold;
+  padding: 5px 15px 0px 15px;
+}
+
+.navBox:hover {
+  text-shadow: 1px 1px $color-blue;
+  border-left: black;
+  border-right: black;
+  font-style: italic;
+}
+
+.navBarParent {
+  margin-top: 25px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.navBar {
+  margin: auto;
+  width: 100%;
+  box-shadow: 0px 2px 2px 2px;
+  border-radius: 10px;
+  background-color: $color-green;
+}
