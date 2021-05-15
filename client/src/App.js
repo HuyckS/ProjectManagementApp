@@ -8,70 +8,71 @@ import Projects from './views/Projects';
 import Messages from './views/Messages';
 import Tasks from './views/Tasks';
 import NewProject from './components/Projects/NewProject';
+import NewTask from './components/Tasks/NewTask';
+import NewMessage from './components/Messages/NewMessage';
 import ProjectDetails from './views/ProjectDetails';
-import UpdateProject from './views/UpdateProject';
+import UpdateProject from './components/Projects/UpdateProject';
+import UserProfile from './views/UserProfile';
+import Logout from './components/Logout';
 import './sass/main.scss';
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [projects, setProjects] = useState([]);
+  const [users, setUsers] = useState([])
 
   useEffect(() => {
     //DOUBLE CHECK AXIOS CALL URL -- change to sort projects on server side that include person as team member
     axios.get("http://localhost:8080/api/projects")
       .then(res => {
-        setProjects(res.data);
+        setProjects(res.data.Projects);
       })
       .catch(err => {
         console.log("Project Error: " + err);
       })
     axios.get("http://localhost:8080/api/tasks")
       .then(res => {
-        setTasks(res.data);
+        setTasks(res.data.Tasks);
       })
       .catch(err => {
         console.log("Task Error: " + err);
       })
     axios.get("http://localhost:8080/api/messages")
       .then(res => {
-        setMessages(res.data);
+        setMessages(res.data.Messages);
       })
       .catch(err => {
         console.log("Message Error: " + err);
       })
-    tasks.map((task) => {
-      for (let i in projects) {
-        if (projects[i].projectName === task.taskForProject && task.complete === false) {
-          projects[i].projectTasks = [...projects[i].projectTasks, task];
-        }
-        if (projects[i].projectName === task.taskForProject && task.complete === true) {
-          projects[i].projectTasksCompleted = [...projects[i].projectTasksCompleted, task];
-        }
-      }
-    })
-    messages.map((mes) => {
-      for (let i in projects) {
-        if (projects[i].projectName === mes.relatedProject && mes.viewed === false) {
-          projects[i].projectMessagesNotViewed = [...projects[i].projectMessagesNotViewed, mes];
-        }
-        if (projects[i].projectName === mes.relatedProject && mes.viewed === true) {
-          projects[i].projectMessages = [...projects[i].projectMessages, mes];
-        }
-      }
-    })
+    axios.get("http://localhost:8080/api/user/names")
+      .then(res => {
+        setMessages(res.data.Users);
+      })
+      .catch(err => {
+        console.log("User Error: " + err);
+      })
+
+
   }, []);
 
   return (
     <div>
       <Router>
-        <Home path="/" />
-        <LoginReg path="/login" />
-        <Dashboard path="/dashboard/:id"
+        <Home path="/"
           projects={projects}
           setProjects={setProjects}
           messages={messages}
-          setMessages={setMessage}
+          setMessages={setMessages}
+          tasks={tasks}
+          setTasks={setTasks}
+        />
+        <LoginReg path="/login" />
+        <Dashboard path="/dashboard"
+          projects={projects}
+          setProjects={setProjects}
+          messages={messages}
+          setMessages={setMessages}
           tasks={tasks}
           setTasks={setTasks}
         />
@@ -79,15 +80,16 @@ function App() {
           projects={projects}
           setProjects={setProjects}
           messages={messages}
-          setMessages={setMessage}
+          setMessages={setMessages}
           tasks={tasks}
           setTasks={setTasks}
+          users={users}
         />
         <Messages path="/messages"
           projects={projects}
           setProjects={setProjects}
           messages={messages}
-          setMessages={setMessage}
+          setMessages={setMessages}
           tasks={tasks}
           setTasks={setTasks}
         />
@@ -95,17 +97,37 @@ function App() {
           projects={projects}
           setProjects={setProjects}
           messages={messages}
-          setMessages={setMessage}
+          setMessages={setMessages}
           tasks={tasks}
           setTasks={setTasks}
         />
-        <NewProject path="/create/project" />
-        <NewTask path="/create/task" />
-        <NewMessage path="/create/message" />
+        <NewProject path="/create/project"
+          projects={projects}
+          setProjects={setProjects}
+          users={users}
+          setUsers={setUsers}
+        />
+        {/* <NewTask path="/create/task"
+          tasks={tasks}
+          setTasks={setTasks}
+          projects={projects}
+          setProjects={setProjects}
+          users={users}
+          setUsers={setUsers}
+        />
+        <NewMessage path="/create/message"
+          messagess={messages}
+          setMessages={setMessages}
+          projects={projects}
+          setProjects={setProjects}
+          users={users}
+          setUsers={setUsers}
+        /> */}
+        {/* 
         <ProjectDetails path="/details/:id" />
         <UpdateProject path="/update/:id" />
         <Logout path="/logout" />
-        <UpdateUser path="/update/user" />
+        <UserProfile path="/update/user" /> */}
       </Router>
     </div>
   );

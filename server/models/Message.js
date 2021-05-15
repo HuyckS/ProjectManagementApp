@@ -7,10 +7,6 @@ const MessageSchema = new mongoose.Schema({
         required: [true, "Subject required."],
         minLength: [3, 'Subject must be longer than 3 characters.']
     },
-    relatedProject: {
-        type: String,
-        required: [true, "Please select general message or the project that this message is related to."]
-    },
     content: {
         type: String,
         required: [true, 'Please include a message.'],

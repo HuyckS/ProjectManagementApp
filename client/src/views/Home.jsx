@@ -3,8 +3,9 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import styles from '../sass/main.scss';
 import NavBar from '../components/Navigation/NavBar';
+import Projects from './Projects';
 
-const Home = () => {
+const Home = ({ projects, setProjects, messages, setMessages, tasks, setTasks }) => {
 
     const handleStart = (e) => {
         e.preventDefault();

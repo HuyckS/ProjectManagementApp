@@ -1,9 +1,8 @@
 import { Link, navigate } from '@reach/router';
 import { useEffect } from 'react';
 import axios from 'axios';
-import NavBar from '../components/Navigation/NavBar';
 
-const ProjectDetails = () => {
+const UpdateTask = () => {
 
 
     return (
@@ -13,4 +12,4 @@ const ProjectDetails = () => {
     )
 }
 
-export default ProjectDetails;
+export default UpdateTask;

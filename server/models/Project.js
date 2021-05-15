@@ -28,14 +28,6 @@ const ProjectSchema = new mongoose.Schema({
         type: Array,
         default: [],
     },
-    projectMessages: {
-        type: Array,
-        default: [],
-    },
-    projectMessagesNotViewed: {
-        type: Array,
-        default: [],
-    },
     dueDate: {
         type: Date,
         required: [true, 'Please enter a due date.'],

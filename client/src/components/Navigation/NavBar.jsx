@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, navigate } from '@reach/router';
-import "../App.css";
 
 const NavBar = ({ page, setPage }) => {
     //conditional here for nav bar options 

@@ -1,32 +1,39 @@
 import { Link, navigate } from '@reach/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import "../App.css"
 import NavBar from '../components/Navigation/NavBar';
+import SideNavBar from '../components/Navigation/SideNavBar';
+import DeleteMessage from '../components/Messages/DeleteMessage';
 
-const Messages = ({ projects, setProjects, messages, setMessage, tasks, setTasks }) => {
+const Messages = ({ projects, setProjects, messages, setMessages, tasks, setTasks }) => {
     let currentUser = "Apollo Huyck";
-    let inbox = [];
-    let inboxViewed = [];
+    const [inbox, setInbox] = useState([]);
+    const [inboxViewed, setInboxViewed] = useState([]);
     useEffect(() => {
-        messages.map((mes) => {
+        let newUnviewed = [];
+        let newViewed = [];
+        messages !== undefined ? messages.map((mes) => {
             if (mes.recipient === currentUser && mes.viewed === false) {
-                inbox.push(mes);
+                newUnviewed.push(mes);
             }
             if (mes.recipient === currentUser && mes.viewed === true) {
-                inbox.push(mes);
+                newViewed.push(mes);
             }
-        })
+        }) : console.log("no messages");
+        setInbox(newUnviewed);
+        setInboxViewed(newViewed);
     }, []);
 
     const toggleMessage = (e) => {
         e.preventDefault();
         // toggle the content and buttons for the message
+        console.log("expand the message");
     }
 
     return (
         <div className="wrapper">
             <NavBar />
+            <SideNavBar />
             <h1 className="title">Message Center</h1>
             <section>
                 <h3 className="section-heading">New Messages</h3>
@@ -61,8 +68,9 @@ const Messages = ({ projects, setProjects, messages, setMessage, tasks, setTasks
                                 <button>Delete</button>
                                 <button>Archive</button>
                             </div>
+                            <DeleteMessage messageId={mes._id} messages={messages} setMessages={setMessages} />
                         </div>
-                    ) : "You have no new messages."}
+                    ) : "You have no messages."}
             </section>
         </div>
     )
