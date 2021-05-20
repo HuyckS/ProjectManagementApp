@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const bcrypt = require("bcrypt");
 
 module.exports.findAllUsers = (req, res) => {
     User.find()
@@ -20,12 +21,26 @@ module.exports.findAllUserNames = (req, res) => {
 
 module.exports.findOneUser = (req, res) => {
     User.findOne({ _id: req.params.id })
+        .populate('projects').exec((err, projects) => {
+            console.log("Populated user with projects")
+        })
+        .populate('messages').exec((err, messages) => {
+            console.log("Populated user with messages")
+        })
         .then(oneUser => res.json({ user: oneUser }))
         .catch(err => res.json({ message: 'Something went wrong', error: err }));
 }
 
 module.exports.createNewUser = (req, res) => {
-    User.create(req.body)
+    User.create({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        username: req.body.username,
+        email: req.body.email,
+        phone: req.body.phone,
+        password: bcrypt.hashSync(req.body.password, 8),
+        roles: req.body.roles,
+    })
         .then(newUser => res.json({ user: newUser }))
         .catch(err => res.json({ message: 'Something went wrong', error: err }));
 }

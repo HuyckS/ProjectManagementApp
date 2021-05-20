@@ -16,16 +16,19 @@ const MessageSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please include your name.']
     },
-    recipient: {
-        type: String,
-        required: [true, 'Please include at least one recipient from your contacts.']
-    },
+    recipient: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Message",
+            required: [true, 'Please include a recipient.']
+        }
+    ],
     priority: {
         type: [String],
         required: true,
-        default: ["normal"],
+        default: ["low"],
         enum: {
-            values: ["normal", "high"],
+            values: ["low", "moderate", "high"],
             message: '{VALUE} is not supported'
         }
     },
@@ -33,10 +36,6 @@ const MessageSchema = new mongoose.Schema({
         type: Boolean,
         required: [true, 'This should be false'],
         default: false
-    },
-    responses: {
-        type: Array,
-        default: []
     }
 }, { timestamps: true });
 

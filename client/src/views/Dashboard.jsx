@@ -7,34 +7,10 @@ import SideNavBar from '../components/Navigation/SideNavBar';
 const Dashboard = ({ projects, setProjects, messages, setMessages, tasks, setTasks }) => {
 
 
-    // console.log(projects);
-    // if (projects.length > 0) {
-
-    //     let newProjects = [...projects];
-    //     for (let i = 0; i < tasks.length; i++) {
-    //         for (let j in newProjects) {
-    //             if (newProjects[j].projectName === tasks[i].taskForProject && tasks[i].complete === false && !newProjects[j].projectsTasks.include(tasks[i].taskForProject)) {
-    //                 newProjects[j].projectTasks = [...newProjects[j].projectTasks, tasks[i]];
-    //             }
-    //             if (newProjects[j].projectName === tasks[i].taskForProject && tasks[i].complete === true && !newProjects[j].projectsTasks.include(tasks[i].taskForProject)) {
-    //                 newProjects[j].projectTasksCompleted = [...newProjects[j].projectTasksCompleted, tasks[i]];
-    //             }
-    //         }
-    //     }
-
-    //     for (let k = 0; k < messages.length; k++) {
-
-    //         for (let m in newProjects) {
-    //             if (newProjects[m].projectName === messages[k].relatedProject && messages[k].viewed === false && !newProjects[m].projectMessages.include(messages[k].relatedProject)) {
-    //                 newProjects[m].projectMessagesNotViewed = [...newProjects[m].projectMessagesNotViewed, messages[k]];
-    //             }
-    //             if (newProjects[m].projectName === messages[k].relatedProject && messages[k].viewed === true && !newProjects[m].projectMessages.include(messages[k].relatedProject)) {
-    //                 newProjects[m].projectMessages = [...newProjects[m].projectMessages, messages[k]];
-    //             }
-    //         }
-    //     }
-    //     setProjects(newProjects);
-    // })
+    // access to User
+    // via User -- messages and projects
+    // query tasks to get a list of tasks and compare _ids to projectTasks to determine which goes where
+    // other option is to query projects and have them populate all tasks
     return (
         <div className="wrapper">
             <NavBar />

@@ -16,18 +16,18 @@ const ProjectSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please include a project leader.']
     },
-    projectMembers: {
-        type: Array,
-        default: [],
-    },
-    projectTasks: {
-        type: Array,
-        default: [],
-    },
-    projectTasksCompleted: {
-        type: Array,
-        default: [],
-    },
+    projectMembers: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ],
+    projectTasks: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Task"
+        }
+    ],
     dueDate: {
         type: Date,
         required: [true, 'Please enter a due date.'],

@@ -15,8 +15,9 @@ const TaskSchema = new mongoose.Schema({
         default: false
     },
     taskForProject: {
-        type: String,
-        required: [true, "Please select general message or the project that this message is related to."]
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Project",
+        required: [true, "Please select the project that this task is related to."]
     },
     projectEndDate: {
         type: Date,

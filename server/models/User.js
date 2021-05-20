@@ -48,22 +48,18 @@ const UserSchema = new mongoose.Schema({
             message: '{VALUE} is not supported'
         }
     },
-    projects: {
-        type: Array,
-        default: []
-    },
-    projectsLeading: {
-        type: Array,
-        default: []
-    },
-    tasks: {
-        type: Array,
-        default: []
-    },
-    messages: {
-        type: Array,
-        default: []
-    }
+    projects: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Project"
+        }
+    ],
+    messages: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Message"
+        }
+    ]
 }, { timestamps: true });
 
 const User = mongoose.model('User', UserSchema);
