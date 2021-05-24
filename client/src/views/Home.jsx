@@ -16,8 +16,8 @@ const Home = ({ projects, setProjects, messages, setMessages, tasks, setTasks })
         <div >
             <NavBar />
             <div >
-                <h1 className={styles.heading}>Collaboration Headquarters</h1>
-                <h3>Collab HQ is an application that provides dedicated space for you and your team to communicate, track, and manage projects of all sizes. Our goal is to keep you focused and organized so that you can get out there and accomplish your goals.</h3>
+                <h1 className={styles.heading}>Team Connect</h1>
+                <h3>Team Connect is an application that provides dedicated space for you and your team to communicate, track, and manage projects of all sizes. Our goal is to keep you focused and organized so that you can get out there and accomplish your goals.</h3>
                 <button className={styles.btn} onClick={handleStart} >Start Here!</button>
             </div>
             <div >
